@@ -1,9 +1,11 @@
-const longEmbed = function (Bot, longTextOrArray, textSeparator, embedTitle, embedColor, pre_or_post) {
+const { RichEmbed } = require("discord.js");
+
+const longEmbed = function (Client, longTextOrArray, textSeparator, embedTitle, embedColor, pre_or_post) {
     // PRE: textSeparator is appended to the current message, before the split
     // POST: textSeparator is prepended to the following message, after the split
     pre_or_post = typeof pre_or_post !== "undefined" ? pre_or_post : "pre";
-    var embed = new Discord.RichEmbed();
-    if (Bot !== null) embed.setFooter(Bot.user.username, Bot.user.avatarURL).setTimestamp();
+    var embed = new RichEmbed();
+    if (Client !== null && Client !== undefined) embed.setFooter(Client.user.username, Client.user.avatarURL).setTimestamp();
     if (embedTitle !== null) embed.setTitle(embedTitle);
     if (embedColor !== null) embed.setColor(embedColor);
 
@@ -46,3 +48,7 @@ const longEmbed = function (Bot, longTextOrArray, textSeparator, embedTitle, emb
         return embed;
     }
 };
+
+module.exports = {
+    longEmbed
+}
